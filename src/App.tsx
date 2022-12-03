@@ -402,7 +402,7 @@ export const App = () => {
 				</Stack>
 			</Box>
 			<Box position={'fixed'} bottom={'3'} left={'3'} backgroundColor={'blackAlpha.600'} p={2} borderRadius={'2xl'} border={'1px'} borderColor={'whiteAlpha.300'} >
-				<Text fontSize={'sm'}>Built by <Link textColor={'blue.400'} href={''}>Kesar</Link></Text>
+				<Text fontSize={'sm'}>Built by <Link textColor={'blue.400'} href={'https://twitter.com/cesarhuret'}>Kesar</Link></Text>
 			</Box>
 		</ChakraProvider>
 	)
