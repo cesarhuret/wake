@@ -69,15 +69,15 @@ export const App = () => {
 		// 	defaultValue: -15,
 		// 	operator: 'greaterthan'
 		// },
-		// {
-		// 	name: 'Valence',
-		// 	variable: valence,
-		// 	setter: setValence,
-		// 	min: 0,
-		// 	max: 1,
-		// 	defaultValue: 0.7,
-		// 	operator: 'greaterthan'
-		// }
+		{
+			name: 'Valence',
+			variable: valence,
+			setter: setValence,
+			min: 0,
+			max: 1,
+			defaultValue: 0.7,
+			operator: 'greaterthan'
+		}
 	]
 
 	useEffect(() => {
@@ -152,7 +152,7 @@ export const App = () => {
 			'danceability': danceability,
 			'energy': energy,
 			// 'loudness': loudness,
-			// 'valence': valence
+			'valence': valence
 		}
 
 		const filteredTracks = featureJson.audio_features.filter((track: any) => {
@@ -366,7 +366,7 @@ export const App = () => {
 							<VStack spacing={10}>
 								{params.map((param, index) => (
 									<VStack key={index} w={'full'} alignItems={'flex-start'}>
-										<Text>{param.name} {'<'} </Text>
+										<Text>{param.name} {param.operator == 'greaterthan' ? '>' : '<'} </Text>
 										<ControlledNumberInput 
 											setValue={param.setter}
 											min={param.min}
