@@ -24,7 +24,6 @@ const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
 
 export const App = () => {
-	// https://open.spotify.com/playlist/37i9dQZF1EptUnc4xfF4gP?si=f561e7cc8e004ec0
 
 	const [token, setToken] = useState<string | null>('');
 
