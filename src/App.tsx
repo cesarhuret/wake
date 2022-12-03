@@ -116,12 +116,17 @@ export const App = () => {
 
 			const userData = await getUserData();
 
-			setUserData(userData);
 
-			getUserPlaylists();
+			if(userData.success == true) {
+				setUserData(userData.json);
 
+				console.log(userData)
+
+				getUserPlaylists();	
+			}
 		}
 
+		console.log(token)
 		token && postInitialisation()
 
 	}, [token])
@@ -236,25 +241,38 @@ export const App = () => {
 			setWakeUp(playlistId)
 		}
 		if(onRepeat) {
+
+			console.log(onRepeat)
 			setOnRepeat(onRepeat)
 		}
 	}
 
 	const getUserData = async () => {
-		const me = await fetch(
-			"https://api.spotify.com/v1/me",
-			{
-				method: 'GET',
-				headers: {
-					'Authorization': 'Bearer ' + token
-				},
-				mode: 'cors',
-				cache: 'default'
-			}
-		)
+		try {
+			const me = await fetch(
+				"https://api.spotify.com/v1/me",
+				{
+					method: 'GET',
+					headers: {
+						'Authorization': 'Bearer ' + token
+					},
+					mode: 'cors',
+					cache: 'default'
+				}
+			)
+	
+			const json = await me.json()
 
-		const json = await me.json()
-		return json;
+			if(json.error) {
+				console.log('hello')
+				logout()
+				return {success: false}
+			}
+
+			return {success: true, json: json};
+		} catch (e) {
+			return {success: false}
+		}
 	}
 
 	const createPlaylist = async (filteredTracks: any[]) => {
