@@ -18,8 +18,8 @@ import { ControlledNumberInput } from "./ControlledNumberInput"
 import "@fontsource/montserrat";
 import theme from "./theme";
 
-const CLIENT_ID = 'a7995e31f75d49cc9eca0c75beab988a'
-const REDIRECT_URI = "http://localhost:3000"
+const CLIENT_ID = process.env.CLIENT_ID
+const REDIRECT_URI = process.env.REDIRECT_URI
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
 
