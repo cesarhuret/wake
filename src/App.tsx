@@ -49,7 +49,8 @@ export const App = () => {
 			min: 0,
 			max: 1,
 			defaultValue: 0.75,
-			operator: 'lessthan'
+			operator: 'lessthan',
+			description: 'The smaller, the less danceable'
 		},
 		{
 			name: 'Energy',
@@ -58,7 +59,8 @@ export const App = () => {
 			min: 0,
 			max: 1,
 			defaultValue: 0.5,
-			operator: 'lessthan'
+			operator: 'lessthan',
+			description: 'The smaller, the less energetic'
 		},
 		// {
 		// 	name: 'Loudness',
@@ -76,7 +78,8 @@ export const App = () => {
 			min: 0,
 			max: 1,
 			defaultValue: 0.7,
-			operator: 'greaterthan'
+			operator: 'greaterthan',
+			description: 'The bigger, the more positive'
 		}
 	]
 
@@ -226,8 +229,8 @@ export const App = () => {
 
 		const onRepeat = playlistJson.items.find((playlist: any) => playlist.name == "On Repeat")?.id
 
-		// get the ID of the playlist name is "Wake Up"
-		const playlistId = playlistJson.items.find((playlist: any) => playlist.name == "Wake Up")?.id
+		// get the ID of the playlist name is "Wakeuptify"
+		const playlistId = playlistJson.items.find((playlist: any) => playlist.name == "Wakeuptify")?.id
 
 		if(playlistId) {
 			setWakeUp(playlistId)
@@ -269,9 +272,9 @@ export const App = () => {
 					mode: 'cors',
 					cache: 'default',
 					body: JSON.stringify({
-						'name': 'Wake Up',
+						'name': 'Wakeuptify',
 						'public': false,
-						'description': 'My Wake Up Playlist'
+						'description': 'My Wakeuptify Playlist'
 					})
 				}
 			)
@@ -341,14 +344,14 @@ export const App = () => {
 		console.log(json)
 		return json;
 	}
-	
+
 	return (
 		<ChakraProvider theme={theme}>
 			<Box p={3} minH="100vh" maxH="100vh" fontFamily={'montserrat'} fontSize="xl">
 				<HStack w={'full'} maxH={'3rem'} justifyContent={'flex-end'}>
 					{token && user ?
 						<HStack>
-							<Image src={user.images[0].url} h={'32px'} rounded={'50%'}/>
+							<Image src={user?.images[0]?.url} h={'32px'} rounded={'50%'}/>
 							<Text fontSize={'lg'}>{user.display_name}</Text>
 							<Button onClick={logout}>Logout</Button>
 						</HStack>
@@ -367,6 +370,7 @@ export const App = () => {
 								{params.map((param, index) => (
 									<VStack key={index} w={'full'} alignItems={'flex-start'}>
 										<Text>{param.name} {param.operator == 'greaterthan' ? '>' : '<'} </Text>
+										<Text fontSize={'sm'}>{param.description}</Text>
 										<ControlledNumberInput 
 											setValue={param.setter}
 											min={param.min}
@@ -382,8 +386,8 @@ export const App = () => {
 					</VStack>
 					{token &&
 					<VStack flex={1} spacing={8}>
-						<Text>Wake Up</Text>
-						{token &&
+						<Text>Wakeuptify</Text>
+						{token && filteredList && filteredList.length > 0 ?
 							<VStack maxH={'80vh'} overflowY={'scroll'} spacing={4}>
 								{filteredList.map((track, index) => (
 									<HStack key={index} w={'full'} p={3} bgColor={'blackAlpha.500'} borderRadius={'lg'} alignItems={'center'}>
@@ -396,6 +400,7 @@ export const App = () => {
 									</HStack>
 								))}
 							</VStack>
+							: <Text>No tracks found</Text>
 						}
 					</VStack>
 					}
