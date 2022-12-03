@@ -208,7 +208,7 @@ export const App = () => {
 
 	const getUserPlaylists = async () => {
 		const playlists = await fetch(
-			"https://api.spotify.com/v1/me/playlists",
+			"https://api.spotify.com/v1/me/playlists?limit=50",
 			{
 				method: 'GET',
 				headers: {
